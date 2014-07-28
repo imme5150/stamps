@@ -24,7 +24,7 @@ module Stamps
       end
       
       if self.use_credentials
-        params.credentials = credentials
+        params[:Credentials] = Credentials.new(credentials)
       end
 
       response = client.call(web_method, :message => params.to_hash)
