@@ -11,6 +11,7 @@ module Stamps
 
     class Account < Hashie::Trash
       property :Authenticator, :from => :authenticator
+      property :Credentials,   :from => :credentials
       property :PostageBalance, :from => :postage_balance
     end
 
@@ -39,6 +40,7 @@ module Stamps
 
     class Rates < Hashie::Trash
       property :Authenticator, :from => :authenticator
+      property :Credentials,   :from => :credentials
       property :Rate,          :from => :rate
     end
 
@@ -107,6 +109,7 @@ module Stamps
 
     class Stamp < Hashie::Trash
       property :Authenticator,                        :from => :authenticator
+      property :Credentials,   :from => :credentials
       property :IntegratorTxID,                       :from => :transaction_id
       property :TrackingNumber,                       :from => :tracking_number
       property :Rate,                                 :from => :rate
@@ -154,6 +157,7 @@ module Stamps
 
     class Address < Hashie::Trash
       property :Authenticator, :from => :authenticator
+      property :Credentials,   :from => :credentials
       property :FullName,      :from => :full_name
       property :NamePrefix,    :from => :name_prefix
       property :FirstName,     :from => :first_name
@@ -183,6 +187,7 @@ module Stamps
 
     class CleanseAddress < Hashie::Trash
       property :Authenticator, :from => :authenticator
+      property :Credentials,   :from => :credentials
       property :Address,       :from => :address
 
       # Maps :address to Address map
@@ -193,6 +198,7 @@ module Stamps
 
     class PurchasePostage < Hashie::Trash
       property :Authenticator,  :from => :authenticator
+      property :Credentials,   :from => :credentials
       property :IntegratorTxID, :from => :transaction_id
       property :PurchaseAmount, :from => :amount
       property :ControlTotal,   :from => :control_total
@@ -200,17 +206,20 @@ module Stamps
     
     class GetPurchaseStatus < Hashie::Trash
       property :Authenticator, :from => :authenticator
+      property :Credentials,   :from => :credentials
       property :TransactionID, :from => :transaction_id
     end
 
     class CancelStamp< Hashie::Trash
       property :Authenticator,  :from => :authenticator
+      property :Credentials,   :from => :credentials
       property :StampsTxID,     :from => :transaction_id
       property :TrackingNumber, :from => :tracking_number
     end
 
     class CarrierPickup < Hashie::Trash
       property :Authenticator,               :from => :authenticator
+      property :Credentials,   :from => :credentials
       property :FirstName,                   :from => :first_name
       property :LastName,                    :from => :last_name
       property :Company,                     :from => :company
@@ -266,6 +275,7 @@ module Stamps
 
     class TrackShipment < Hashie::Trash
       property :Authenticator, :from => :authenticator
+      property :Credentials,   :from => :credentials
       property :StampsTxID,    :from => :stamps_transaction_id
     end
 

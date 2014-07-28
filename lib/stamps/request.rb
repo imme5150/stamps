@@ -22,6 +22,10 @@ module Stamps
         globals.open_timeout self.open_timeout
         globals.read_timeout self.read_timeout
       end
+      
+      if self.use_credentials
+        params = params.merge(credentials)
+      end
 
       response = client.call(web_method, :message => params.to_hash)
 
@@ -39,13 +43,10 @@ module Stamps
     # Make Authentication request for the user
     #
     def get_authenticator_token
+      return nil if self.use_credentials
+      
       response_hash = self.request('AuthenticateUser',
-        Stamps::Mapping::AuthenticateUser.new(
-          :credentials => {
-            :integration_id => self.integration_id,
-            :username       => self.username,
-            :password       => self.password
-        })
+        Stamps::Mapping::AuthenticateUser.new(credentials)
       )
       if response_hash[:authenticate_user_response] != nil
         response_hash[:authenticate_user_response][:authenticator]
@@ -57,6 +58,16 @@ module Stamps
     # Concatenates namespace and web method in a way the API can understand
     def formatted_soap_action(web_method)
       [self.namespace, web_method.to_s].compact.join('/')
+    end
+    
+    def credentials
+      {
+        :credentials => {
+          :integration_id => self.integration_id,
+          :username       => self.username,
+          :password       => self.password
+        }
+      }
     end
 
   end

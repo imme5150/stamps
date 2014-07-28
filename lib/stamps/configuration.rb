@@ -7,6 +7,7 @@ module Stamps
       :integration_id,
       :username,
       :password,
+      :use_credentials,
       :namespace,
       :format,
       :return_address,
