@@ -24,7 +24,7 @@ module Stamps
       end
       
       if self.use_credentials
-        params = params.merge(credentials)
+        params.credentials = credentials
       end
 
       response = client.call(web_method, :message => params.to_hash)
@@ -46,7 +46,7 @@ module Stamps
       return nil if self.use_credentials
       
       response_hash = self.request('AuthenticateUser',
-        Stamps::Mapping::AuthenticateUser.new(credentials)
+        Stamps::Mapping::AuthenticateUser.new(:credentials => credentials)
       )
       if response_hash[:authenticate_user_response] != nil
         response_hash[:authenticate_user_response][:authenticator]
@@ -62,11 +62,9 @@ module Stamps
     
     def credentials
       {
-        :credentials => {
-          :integration_id => self.integration_id,
-          :username       => self.username,
-          :password       => self.password
-        }
+        :integration_id => self.integration_id,
+        :username       => self.username,
+        :password       => self.password
       }
     end
 
