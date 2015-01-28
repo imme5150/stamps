@@ -250,16 +250,16 @@ module Stamps
       property :CustomsLines,      :from => :customs_lines
 
       # Maps :customs CustomsLine map
-      def customs_lines=(customs)
+      def customs_lines=(val)
         # Important:  Must call to_hash to force re-ordering!
-        self[:CustomsLines] = customs.collect{ |val| CustomsLinesArray.new(val).to_hash }
+        self[:CustomsLines] = CustomsLinesArray.new(val).to_hash
       end
     end
 
     class CustomsLinesArray < Hashie::Trash
       property :CustomsLine,     :from => :custom
-      def custom=(val)
-        self[:CustomsLine] = CustomsLine.new(val).to_hash
+      def custom=(customs)
+        self[:CustomsLine] = customs.collect{ |val| CustomsLine.new(val).to_hash }
       end
     end
 
