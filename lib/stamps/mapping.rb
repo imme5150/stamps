@@ -102,9 +102,9 @@ module Stamps
       property :AddOnType,                 :from => :add_on_type
       property :ProhibitedWithAnyOf,       :from => :prohibited_with_any_of
       property :MissingData,               :from => :missing_data
-      property :RequiresAllOf,             :from => :requires_all_of
       def prohibited_with_any_of; end
       def prohibited_with_any_of=(vals); end
+      property :RequiresAllOf,             :from => :requires_all_of
     end
 
     class Stamp < Hashie::Trash
