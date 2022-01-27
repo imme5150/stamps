@@ -28,12 +28,12 @@ module Stamps
       property :Username,      :from => :username
       property :Password,      :from => :password
     end
-    
+
     class PostageBalance < Hashie::Trash
       property :AvailablePostage,  :from => :available_postage
-      property :ControlTotal,      :from => :control_total     
+      property :ControlTotal,      :from => :control_total
     end
-    
+
     class GetPostageStatus < Hashie::Trash
       property :TransactionID, :from => :transaction_id
     end
@@ -203,7 +203,7 @@ module Stamps
       property :PurchaseAmount, :from => :amount
       property :ControlTotal,   :from => :control_total
     end
-    
+
     class GetPurchaseStatus < Hashie::Trash
       property :Authenticator, :from => :authenticator
       property :Credentials,   :from => :credentials
@@ -248,6 +248,7 @@ module Stamps
       property :InvoiceNumber,     :from => :invoice_number
       property :OtherDescribe,     :from => :other_describe
       property :CustomsLines,      :from => :customs_lines
+      property :SendersCustomsReference, :from => :senders_customs_reference
 
       # Maps :customs CustomsLine map
       def customs_lines=(val)
