@@ -46,8 +46,10 @@ module Stamps
 
     class Rate < Hashie::Trash
       property :FromZIPCode,             :from => :from_zip_code
+      property :From,                    :from => :from
       property :ToZIPCode,               :from => :to_zip_code
       property :ToCountry,               :from => :to_country
+      property :To,                      :from => :to
       property :Amount,                  :from => :amount
       property :MaxAmount,               :from => :max_amount
       property :ServiceType,             :from => :service_type
@@ -85,19 +87,44 @@ module Stamps
 
       # Maps :rate to AddOns map
       def add_ons=(addons)
-        self[:AddOns] = AddOnsArray.new(:add_on_v9 => addons[:add_on_v9])
+        self[:AddOns] = AddOnsArray.new(:add_on_v9 => addons[:add_on_v9], :add_on_v16 => addons[:add_on_v16])
+      end
+
+      def from=(from_address)
+        self[:From] = Address.new(from_address)
+      end
+
+      def to=(to_address)
+        self[:To] = Address.new(to_address)
       end
     end
 
     class AddOnsArray < Hashie::Trash
       property :AddOnV9,     :from => :add_on_v9
+      property :AddOnV16,     :from => :add_on_v16
+
       def add_on_v9=(vals)
         return unless vals
         self[:AddOnV9] = vals.map{ |value| AddOnV9.new(value).to_hash }
       end
+
+      def add_on_v16=(vals)
+        return unless vals
+        self[:AddOnV16] = vals.map{ |value| AddOnV16.new(value).to_hash }
+      end
     end
 
     class AddOnV9 < Hashie::Trash
+      property :Amount,                    :from => :amount
+      property :AddOnType,                 :from => :add_on_type
+      property :ProhibitedWithAnyOf,       :from => :prohibited_with_any_of
+      property :MissingData,               :from => :missing_data
+      def prohibited_with_any_of; end
+      def prohibited_with_any_of=(vals); end
+      property :RequiresAllOf,             :from => :requires_all_of
+    end
+
+    class AddOnV16 < Hashie::Trash
       property :Amount,                    :from => :amount
       property :AddOnType,                 :from => :add_on_type
       property :ProhibitedWithAnyOf,       :from => :prohibited_with_any_of
