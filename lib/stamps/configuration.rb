@@ -9,6 +9,7 @@ module Stamps
       :password,
       :use_credentials,
       :namespace,
+      :namespace_identifier,
       :format,
       :return_address,
       :test_mode,
@@ -23,6 +24,8 @@ module Stamps
 
     # The default namespace used on Stamps.com wsdl
     DEFAULT_NAMESPACE = 'http://stamps.com/xml/namespace/2010/11/swsim/swsimv29'
+
+    DEFAULT_NAMESPACE_IDENTIFIER = :tns
 
     # @note JSON is preferred over XML because it is more concise and faster to parse.
     DEFAULT_FORMAT = :hash
@@ -64,6 +67,7 @@ module Stamps
     def reset
       self.endpoint     = DEFAULT_ENDPOINT
       self.namespace    = DEFAULT_NAMESPACE
+      self.namespace_identifier = DEFAULT_NAMESPACE_IDENTIFIER
       self.format       = DEFAULT_FORMAT
       self.log_messages = DEFAULT_LOG_MESSAGES
       self.raise_errors = DEFAULT_RAISE_ERRORS
