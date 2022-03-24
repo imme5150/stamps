@@ -45,6 +45,7 @@ module Stamps
     end
 
     class Rate < Hashie::Trash
+      property :Carrier,                 :from => :carrier
       property :FromZIPCode,             :from => :from_zip_code
       property :From,                    :from => :from
       property :ToZIPCode,               :from => :to_zip_code
