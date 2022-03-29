@@ -42,10 +42,10 @@ module Stamps
       property :Authenticator, :from => :authenticator
       property :Credentials,   :from => :credentials
       property :Rate,          :from => :rate
+      property :Carrier,       :from => :carrier
     end
 
     class Rate < Hashie::Trash
-      property :Carrier,                 :from => :carrier
       property :FromZIPCode,             :from => :from_zip_code
       property :From,                    :from => :from
       property :ToZIPCode,               :from => :to_zip_code
