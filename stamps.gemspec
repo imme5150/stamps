@@ -29,10 +29,10 @@ Gem::Specification.new do |s|
   s.add_development_dependency('rake')
   s.add_development_dependency('pry')
 
-  s.add_runtime_dependency('savon', '~> 2.10.0')
-  s.add_runtime_dependency('httpi', '~> 2.4.0')
-  s.add_runtime_dependency('json', '~> 1.0')
-  s.add_runtime_dependency('multi_json', '~> 1.0')
-  s.add_runtime_dependency('hashie', '~> 1.0')
+  s.add_runtime_dependency('savon', '>= 2.10.0')
+  s.add_runtime_dependency('httpi', '>= 2.4.0')
+  s.add_runtime_dependency('json', '>= 1.0')
+  s.add_runtime_dependency('multi_json', '>= 1.0')
+  s.add_runtime_dependency('hashie', '>= 1.0')
 
 end
