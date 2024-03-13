@@ -55,13 +55,15 @@ and customs forms for printing.
 Getting Started
 ----------
 Once you have a test account with integration id, we can simple pass
-them to the configure block:
+them to the configure block.  You will probably also need to specify the endpoint you're using.  There will be a different endpoint for testing and production.  To find the namespace, open up the WSDL and look for targetNamespace.
 
     # Authenticate you stamps.com credentials
     Stamps.configure do |config|
       config.integration_id = 'XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXXX'
       config.username       = 'STAMPS USERNAME'
       config.password       = 'STAMPS PASSWORD'
+      config.endpoint       = 'https://swsim.testing.stamps.com/swsim/swsimv135.asmx'
+      config.namespace      = 'http://stamps.com/xml/namespace/2023/07/swsim/SwsimV135'
     end
 
 Now we can now be able to retrieve information about our account:
