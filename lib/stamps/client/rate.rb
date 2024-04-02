@@ -19,10 +19,10 @@ module Stamps
       # Produces a list of rates matching the criteria provided in
       # the parameters
       #
-      def get_rates(params = {})
+      def get_rates(params = {}, carrier = 'USPS')
         rates = Stamps::Mapping::Rates.new({
           :authenticator => authenticator_token,
-          :carrier       => "USPS",
+          :carrier       => carrier,
           :rate          => Stamps::Mapping::Rate.new(params)
         })
         response = request('GetRates', rates)

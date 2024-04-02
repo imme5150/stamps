@@ -242,7 +242,7 @@ module Stamps
       property :Authenticator,  :from => :authenticator
       property :Credentials,   :from => :credentials
       property :StampsTxID,     :from => :transaction_id
-      property :TrackingNumber, :from => :tracking_number
+      property :TrackingNumbers, :from => :tracking_numbers
     end
 
     class CarrierPickup < Hashie::Trash
