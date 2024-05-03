@@ -308,5 +308,29 @@ module Stamps
       property :StampsTxID,    :from => :stamps_transaction_id
     end
 
+    class CreateManifest < Hashie::Trash
+      property :Authenticator,     :from => :authenticator
+      property :IntegratorTxID,    :from => :integrator_tx_id
+      property :StampsTxIds,       :from => :stamps_tx_ids
+      property :TrackingNumbers,   :from => :tracking_numbers
+      property :ShipDate,          :from => :ship_date
+      property :FromAddress,       :from => :from_address
+      property :ImageType,         :from => :image_type
+      property :PrintInstructions, :from => :print_instructions
+      property :ManifestType,      :from => :manifest_type
+
+      def from_address=(from_address)
+        self[:FromAddress] = Address.new(from_address)
+      end
+
+      def stamps_tx_ids=(tx_ids)
+        self[:StampsTxIds] = tx_ids.map {|id| {guid:id}}
+      end
+
+      def tracking_numbers=(tracking_numbers)
+        self[:TrackingNumbers] = tracking_numbers.map {|n| {string:n}}
+      end
+    end
+
   end
 end

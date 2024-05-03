@@ -55,6 +55,29 @@ module Stamps
         response[:errors].empty? ? response[:track_shipment_response] : response
       end
 
+      # CreateManifest
+      #
+      # The CreateManifest method generates an end of day manifest for previously created indicium (e.g. SCAN form). The SWS API will return a URL or a series of URLs separated by spaces for the manifest. A SCAN form specifically can accept maximum 1,000 labels.  Each label can only be added once to a single SCAN form.
+      #
+      # @param params [Hash] authenticator, integrator_tx_id, stamps_tx_ids, tracking_numbers, ship_date, from_address, image_type, print_instructions, manifest_type
+      # stamps_tx_ids:	[Array of strings] Collection of stamps_tx_ids from previous CreateIndicium calls. Can be null if ShipDate is provided.
+      # tracking_numbers: Collection of Tracking Numbers from previous CreateIndicium calls. Can be used as an alternative to StampsTxIDs. Can be null if ShipDate is provided.
+      # ship_date:  Effective when StampsTxIDs is null. When ShipDate is non-null, all available prints (that have not been cancelled or added to another SCAN form) from the specified ShipDate are included on SCAN form. Can be null when using StampsTxIDs or Tracking Numbers
+      # image_type: Image type of SCAN form (Auto, Gif, Jpg, Pdf, Png, etc.) If the ImageType is not PDF, the response string could include multiple URLs separated by spaces
+      # print_instructions: [boolean] Indicates if the instruction page is generated. Optional, defaults to false
+      # manifest_type Optional, defaults to 'ScanForm'
+      #
+      # @return [Hash]
+      #
+      # https://developer.stamps.com/soap-api/reference/swsimv135.html#reprintindiciumresponse-object
+      #
+      def create_manifest(params = {})
+        params[:authenticator] ||= authenticator_token
+        params[:print_instructions] = false if !params.has_key?(:print_instructions)
+        response = request('CreateManifest', Stamps::Mapping::CreateManifest.new(params))
+        response[:errors].empty? ? response[:create_manifest_response][:end_of_day_manifests][:end_of_day_manifest][:manifest_url] : response
+      end
+
     end
   end
 end
