@@ -147,7 +147,6 @@ module Stamps
       property :Customs,                              :from => :customs
       property :SampleOnly,                           :from => :sample
       property :ImageType,                            :from => :image_type
-      property :PaperSize,                            :from => :paper_size
       property :EltronPrinterDPIType,                 :from => :label_resolution
       property :memo
       property :recipient_email
@@ -157,6 +156,7 @@ module Stamps
       property :shipmentNotificationCompanyInSubject, :from => :notify_in_subject
       property :rotationDegrees,                      :from => :rotation
       property :printMemo,                            :from => :print_memo
+      property :PaperSize,                            :from => :paper_size
 
       # Maps :from to Address map
       def from=(val)
