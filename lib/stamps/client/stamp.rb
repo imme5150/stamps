@@ -32,6 +32,21 @@ module Stamps
         response[:errors].empty? ? response[:create_indicium_response] : response
       end
 
+      # Reprint postage label
+      #
+      # The ReprintIndicium method returns data for a previously issued indicium to allow for label reprint functionality in the event of printing or formatting errors. Labels may be reprinted up to 7 days after label creation. This method may also be used to return indicia with non-material modifications for the purpose of appropriate print settings. For example, ReprintIndicium can be used to return an existing indicium with an alternative ImageType, alternative RotationDegrees, or, for sheets containing multiple labels, alternative row/column print locations.
+      # Note: When reprinting labels, users must destroy the original labels that printed in error. Labels must be used only once.
+      # Note: Integrations are required to call ReprintIndicium to retrieve a label image for a reprint request. Labels should not be stored client-side after initial print.
+      #
+      # More info: https://developer.stamps.com/soap-api/reference/swsimv135.html#reprintindicium
+      # Only one of IntegratorTxId, StampsTxId, or TrackingNumber should be provided to identify the original label.
+      #
+      def reprint(params)
+        params[:authenticator] = authenticator_token unless params[:authenticator]
+        response = request('ReprintIndicium', Stamps::Mapping::Reprint.new(params))
+        response[:errors].empty? ? response[:reprint_indicium_result] : response
+      end
+
       # Refunds postage and voids the shipping label
       #
       # @param [Hash] authenticator
@@ -69,7 +84,7 @@ module Stamps
       #
       # @return [Hash]
       #
-      # https://developer.stamps.com/soap-api/reference/swsimv135.html#reprintindiciumresponse-object
+      # https://developer.stamps.com/soap-api/reference/swsimv135.html#createmanifest
       #
       def create_manifest(params = {})
         params[:authenticator] ||= authenticator_token

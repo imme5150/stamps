@@ -333,5 +333,21 @@ module Stamps
       end
     end
 
+    class Reprint < Hashie::Trash
+      property :Authenticator,     :from => :authenticator
+      property :IntegratorTxID,    :from => :integrator_tx_id
+      property :StampsTxId,       :from => :stamps_tx_id
+      property :TrackingNumber,   :from => :tracking_number
+      property :ImageType,         :from => :image_type
+
+      def stamps_tx_id=(tx_id)
+        self[:StampsTxId] = {guid:tx_id}
+      end
+
+      def tracking_number=(tracking_number)
+        self[:TrackingNumber] = {string:tracking_number}
+      end
+    end
+
   end
 end
