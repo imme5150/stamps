@@ -339,13 +339,13 @@ module Stamps
       property :StampsTxId,       :from => :stamps_tx_id
       property :TrackingNumber,   :from => :tracking_number
       property :ImageType,         :from => :image_type
+      property :RotationDegrees,   :from => :rotation_degrees
+      property :PaperSize,         :from => :paper_size
+      property :StartRow,         :from => :start_row
+      property :StartColumn,         :from => :start_column
 
       def stamps_tx_id=(tx_id)
         self[:StampsTxId] = {guid:tx_id}
-      end
-
-      def tracking_number=(tracking_number)
-        self[:TrackingNumber] = {string:tracking_number}
       end
     end
 

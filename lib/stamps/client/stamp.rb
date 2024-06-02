@@ -43,8 +43,8 @@ module Stamps
       #
       def reprint(params)
         params[:authenticator] = authenticator_token unless params[:authenticator]
-        response = request('ReprintIndicium', Stamps::Mapping::Reprint.new(params))
-        response[:errors].empty? ? response[:reprint_indicium_result] : response
+        response = request('ReprintIndicium', {indiciumRequest:Stamps::Mapping::Reprint.new(params).to_hash})
+        response[:errors].empty? ? response[:reprint_indicium_response][:reprint_indicium_result] : response
       end
 
       # Refunds postage and voids the shipping label
