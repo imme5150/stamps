@@ -54,6 +54,7 @@ module Stamps
       when 406
         raise NotAcceptable, "(#{http.code}): #{message}"
       when 500
+        Raven.capture_message("Server error", level:'warning', extra:{http:http.inspect}) if defined?(Raven)
         raise InternalServerError, "Stamps.com had an internal error. (#{http.code}): #{message}"
       when 502..503
         raise ServiceUnavailable, "(#{http.code}): #{message}"
