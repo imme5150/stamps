@@ -6,7 +6,7 @@ module Stamps
   #
   class Response
 
-    # Expects an <tt>Savon::SOAP::Response</tt> and handles errors.
+    # Expects an <tt>Savon::Response</tt> and handles errors.
     def initialize(response)
       self.errors = []
       self.valid = true
@@ -37,26 +37,25 @@ module Stamps
     # so that clients can process the error messages as they wish
     #
     def raise_errors
-      message =  'FIXME:  Need to parse http for response message'
       return self.format_soap_faults if savon.soap_fault?
 
       case http.code.to_i
       when 200
         return
       when 400
-        raise BadRequest, "(#{http.code}): #{message}"
+        raise BadRequest.new(hash), "(#{http.code}): BadRequest"
       when 401
-        raise Unauthorized, "(#{http.code}): #{message}"
+        raise Unauthorized.new(hash), "(#{http.code}): Unauthorized"
       when 403
-        raise Forbidden, "(#{http.code}): #{message}"
+        raise Forbidden.new(hash), "(#{http.code}): Forbidden"
       when 404
-        raise NotFound, "(#{http.code}): #{message}"
+        raise NotFound.new(hash), "(#{http.code}): NotFound"
       when 406
-        raise NotAcceptable, "(#{http.code}): #{message}"
+        raise NotAcceptable.new(hash), "(#{http.code}): NotAcceptable"
       when 500
-        raise InternalServerError, "Stamps.com had an internal error. (#{http.code}): #{message}"
+        raise InternalServerError.new(hash), "500: Stamps.com had an internal error"
       when 502..503
-        raise ServiceUnavailable, "(#{http.code}): #{message}"
+        raise ServiceUnavailable.new(hash), "(#{http.code}): ServiceUnavailable"
       end
     end
 
