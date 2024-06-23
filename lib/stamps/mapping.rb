@@ -156,6 +156,7 @@ module Stamps
       property :shipmentNotificationCompanyInSubject, :from => :notify_in_subject
       property :rotationDegrees,                      :from => :rotation
       property :printMemo,                            :from => :print_memo
+      property :nonDeliveryOption,                    :from => :non_delivery
       property :PaperSize,                            :from => :paper_size
 
       # Maps :from to Address map
